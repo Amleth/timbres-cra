@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { Box, Button, AppBar, Toolbar } from '@material-ui/core'
+import { Home as HomeIcon } from '@material-ui/icons'
+import { makeStyles } from '@material-ui/core/styles'
+import A from './components/A'
+import B from './components/B'
+import Home from './components/Home'
+
+const useStyles = makeStyles({
+  bar: {
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    '& a': {
+      margin: '0 5px',
+    },
+  },
+})
 
 function App() {
+  const classes = useStyles()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router basename='/timbres'>
+      <AppBar position='static'>
+        <Toolbar className={classes.bar}>
+          <Button
+            color='inherit'
+            aria-label='home'
+            component={Link}
+            to='/'
+            startIcon={<HomeIcon />}>
+            Accueil
+          </Button>
+          <Button
+            color='inherit'
+            component={Link}
+            to='/a'
+            startIcon={<i className='fas fa-user'></i>}>
+            A
+          </Button>
+          <Button
+            color='inherit'
+            component={Link}
+            to='/b'
+            startIcon={<i className='far fa-user'></i>}>
+            B
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <Box m={2} />
+      <div>
+        <Switch>
+          <Route exact path='/' children={Home} />
+          <Route path='/a' children={A} />
+          <Route path='/b' children={B} />
+        </Switch>
+      </div>
+    </Router>
+  )
 }
 
-export default App;
+export default App
