@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import { Box, Button, AppBar, Toolbar } from '@material-ui/core'
 import { Home as HomeIcon } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
-import A from './components/A'
-import B from './components/B'
+import Consulter from './components/Consulter'
+import Airs from './components/Airs'
 import Home from './components/Home'
 
 const useStyles = makeStyles({
@@ -15,13 +15,16 @@ const useStyles = makeStyles({
       margin: '0 5px',
     },
   },
+  appBar: {
+    background: '#C72C2C',
+  }
 })
 
 function App() {
   const classes = useStyles()
   return (
     <Router basename='/timbres'>
-      <AppBar position='static'>
+      <AppBar position='static' className={classes.appBar}>
         <Toolbar className={classes.bar}>
           <Button
             color='inherit'
@@ -34,16 +37,16 @@ function App() {
           <Button
             color='inherit'
             component={Link}
-            to='/a'
+            to='/consulter'
             startIcon={<i className='fas fa-user'></i>}>
-            A
+            Consulter base
           </Button>
           <Button
             color='inherit'
             component={Link}
-            to='/b'
+            to='/airs'
             startIcon={<i className='far fa-user'></i>}>
-            B
+            Airs
           </Button>
         </Toolbar>
       </AppBar>
@@ -51,8 +54,8 @@ function App() {
       <div>
         <Switch>
           <Route exact path='/' children={Home} />
-          <Route path='/a' children={A} />
-          <Route path='/b' children={B} />
+          <Route path='/consulter' children={Consulter} />
+          <Route path='/airs' children={Airs} />
         </Switch>
       </div>
     </Router>
